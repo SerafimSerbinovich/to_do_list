@@ -8,7 +8,7 @@ from django.contrib.auth.models import Group
 class CustomUserAdmin(UserAdmin):
     readonly_fields = ("last_login", "date_joined")
     fieldsets = (
-        (None, {"fields": ("username", "password")}),
+        (None, {"fields": ("username",)}),
         ("Personal info", {"fields": ("first_name", "last_name", "email")}),
         ("Permissions", {
                 "fields": (
@@ -19,6 +19,7 @@ class CustomUserAdmin(UserAdmin):
         ),
         ("Important dates", {"fields": ("last_login", "date_joined")}),
     )
-
+    list_display = ("username", "email", "first_name", "last_name")
+    list_filter = ("is_staff", "is_superuser", "is_active")
 
 admin.site.unregister(Group)
