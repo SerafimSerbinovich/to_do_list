@@ -13,9 +13,32 @@ services:
       timeout: 3s
       retries: 10
     ports:
-      - '5432:5432'
+      - "5432:5432"
     volumes:
       - diploma_15_pg_data:/var/lib/postgresql/data
+
+  migrations:
+    build: .
+    env_file: .env
+    depends_on:
+      db:
+        condition: service_healthy
+    command: python manage.py migrate
+
+
+  api:
+    build: .
+    env_file: .env
+    depends_on:
+      db:
+        condition: service_healthy
+      migrations:
+        condition: service_completed_successfully
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./core:/to_do_list/core
+      - ./to_do_list:/to_do_list/to_do_list
 
 volumes:
   diploma_15_pg_data:

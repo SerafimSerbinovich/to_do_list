@@ -85,7 +85,7 @@ DATABASES = {
         "NAME": dotenv.get_key(BASE_DIR.joinpath('.env'), 'POSTGRES_DB'),
         "USER": dotenv.get_key(BASE_DIR.joinpath('.env'), 'POSTGRES_USER'),
         "PASSWORD": dotenv.get_key(BASE_DIR.joinpath('.env'), 'POSTGRES_PASSWORD'),
-        "HOST": "127.0.0.1",
+        "HOST": "db",
         "PORT": "5432",
     }
 }
