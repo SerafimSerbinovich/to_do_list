@@ -26,8 +26,7 @@ dotenv.load_dotenv()
 SECRET_KEY = dotenv.get_key(BASE_DIR.joinpath('.env'), 'SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-debug_str = dotenv.get_key(BASE_DIR.joinpath('.env'), 'DEBUG')
-DEBUG = bool(distutils.util.strtobool(debug_str))
+DEBUG = False
 
 
 ALLOWED_HOSTS = ['*']

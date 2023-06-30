@@ -8,13 +8,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
+
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
@@ -29,12 +32,33 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
       - name: Copy on server
         uses: appleboy/scp-action@master
         with:
-          host: {{ secrets.SSH_HOST }}
-          username: {{ secrets.SSH_USER }}
-          password: {{ secrets.SSH_PASSWORD }}
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
           source: "deploy/*"
           target: "todolist_15"
           strip_components: 1
+
+#      - name: Run compose
+#        uses: appleboy/ssh-action@master
+#        with:
+#          host: ${{ secrets.SSH_HOST }}
+#          username: ${{ secrets.SSH_USER }}
+#          password: ${{ secrets.SSH_PASSWORD }}
+#          script: |
+#            cd todolist_15
+#            docker-compose pull
+#            docker-compose down
+#            docker-compose up -d
+#      - name: CleanUp
+#        uses: appleboy/ssh-action@master
+#        with:
+#          host: ${{ secrets.SSH_HOST }}
+#          username: ${{ secrets.SSH_USER }}
+#          password: ${{ secrets.SSH_PASSWORD }}
+#          script: |
+#            docker system prune -f -a

@@ -28,6 +28,8 @@ services:
   api:
     image: ${DOCKERHUB_USER}/diploma_15:latest
     env_file: .env
+    environment:
+      - DEBUG=False
     depends_on:
       db:
         condition: service_healthy
