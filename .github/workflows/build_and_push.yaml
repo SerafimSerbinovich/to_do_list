@@ -32,9 +32,9 @@ jobs:
       - name: Copy on server
         uses: appleboy/scp-action@master
         with:
-          host: {{ secrets.SSH_HOST}}
-          username: {{ secrets.SSH_USER}}
-          password: {{ secrets.SSH_PASSWORD}}
+          host: {{ secrets.SSH_HOST }}
+          username: {{ secrets.SSH_USER }}
+          password: {{ secrets.SSH_PASSWORD }}
           source: "deploy/*"
           target: "todolist_15"
           strip_components: 1
