@@ -23,11 +23,10 @@ dotenv.load_dotenv()
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = dotenv.get_key(BASE_DIR.joinpath('.env'), 'SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -42,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -82,11 +82,11 @@ WSGI_APPLICATION = 'to_do_list.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": dotenv.get_key(BASE_DIR.joinpath('.env'), 'POSTGRES_DB'),
-        "USER": dotenv.get_key(BASE_DIR.joinpath('.env'), 'POSTGRES_USER'),
-        "PASSWORD": dotenv.get_key(BASE_DIR.joinpath('.env'), 'POSTGRES_PASSWORD'),
-        "HOST": "db",
-        "PORT": "5432",
+        "NAME": os.environ.get("POSTGRES_DB"),
+        "USER": os.environ.get("POSTGRES_USER"),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
+        "HOST": os.environ.get("POSTGRES_HOST", "127.0.0.1"),
+        "PORT": os.environ.get("POSTGRES_PORT", 5432),
     }
 }
 
