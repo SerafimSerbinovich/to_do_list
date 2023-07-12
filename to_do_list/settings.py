@@ -42,9 +42,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'social_django',
     'core',
+    'goals',
     'rest_framework',
+    'django_filters',
 
 ]
+
+if DEBUG:
+    INSTALLED_APPS += [
+        'django_extensions',
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -144,3 +151,7 @@ SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.vk.VKOAuth2',
     'django.contrib.auth.backends.ModelBackend')
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    }

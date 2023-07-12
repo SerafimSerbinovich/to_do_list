@@ -38,6 +38,7 @@ services:
       - "8000:8000"
     volumes:
       - ./core:/to_do_list/core
+      - ./goals:/to_do_list/goals
       - ./to_do_list:/to_do_list/to_do_list
 
   collect_static:
@@ -48,7 +49,7 @@ services:
       - django_static:/to_do_list/static/
 
   frontend:
-    image: sermalenk/skypro-front:lesson-34
+    image: sermalenk/skypro-front:lesson-36
     restart: on-failure
     ports:
       - "80:80"
