@@ -37,7 +37,7 @@ services:
         condition: service_completed_successfully
 
   bot:
-    image: ${DOCKERHUB_USERNAME}/diploma_15:latest
+    image: ${DOCKERHUB_USER}/diploma_15:latest
     env_file: .env
     depends_on:
       db:
